@@ -12,23 +12,22 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-	@Value("${spring.datasource.url}")
+	@Value("${spring.datasource.url:jdbc:mysql://localhost:3306/zio_db}")
 	public String url;
 
-	@Value("${spring.datasource.username}")
+	@Value("${spring.datasource.username:root}")
 	private String username;
 
-	@Value("${spring.datasource.password}")
+	@Value("${spring.datasource.password:1234qwer}")
 	private String password;
 
 	@Bean
 	public DataSource dataSource() {
-//		log.error("DataSource init url: {}, username: {}, password: {}", url, username, password);
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/zio_db");
-		dataSource.setUsername("root");
-		dataSource.setPassword("1234qwer");
+		dataSource.setUrl(url);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
+		log.error("DataSource init url: {}, username: {}, password: {}", url, username, password);
 		return dataSource;
 	}
 }
