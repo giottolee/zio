@@ -1,0 +1,15 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  db:
+    image: mysql
+    container_name: zio-db-dev
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234qwer
+      MYSQL_DATABASE: zio_db
+    volumes:
+      - ~/data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
